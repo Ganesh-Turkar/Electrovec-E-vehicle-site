@@ -1,0 +1,335 @@
+    @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
+    body {
+        padding-top: 10vh;
+        background: #43c6ac;
+        background: -webkit-linear-gradient(to right, #191654, #43c6ac);
+        background: linear-gradient(to right, #191654, #43c6ac);
+        min-height: 100vh;
+    }
+    
+    .aboutcontainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: auto;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: #11a5df2b; */
+        width: 65vw;
+    }
+    
+    h2 {
+        color: #403333;
+    }
+    
+    .profilesec {
+        margin: 20px;
+        width: 99%;
+    }
+    
+    .details {
+        font-family: "Ubuntu", sans-serif;
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+        background: #DCDCDC;
+        color: black;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 0 15px rgba(27, 35, 47, 1);
+    }
+    
+    .details h3 {
+        text-align: center;
+    }
+    
+    .title {
+        font-family: 'Courier New', 'monospace';
+        color: "#f6f6f6";
+        margin: auto;
+        font-weight: bold;
+        margin: 5px;
+        font-size: 1.1vw;
+    }
+    
+    .mtitle {
+        font-family: 'Courier New', 'monospace';
+        color: "#f6f6f6";
+        margin: auto;
+        font-weight: bold;
+        margin: 5px;
+        font-size: 1.0vw;
+    }
+    
+    .attrdiv {
+        margin: 7px;
+    }
+    
+    .attr {
+        font-weight: bold;
+        font-size: 1.3vw;
+    }
+    
+    .mattr {
+        font-weight: bold;
+        font-size: 1.3vw;
+    }
+    
+    .editdetails {
+        display: none;
+    }
+    
+    .aboutdata {
+        text-align: justify;
+        text-justify: inter-word;
+        font-size: 15px;
+        margin-left: 85px;
+        margin-right: 85px;
+    }
+    
+    .profileheading {
+        margin: auto;
+        font-weight: bold;
+    }
+    
+    @media screen and (max-width: 780px) {
+        .details {
+            width: 100%;
+        }
+    }
+    
+    .imganddetails {
+        display: flex;
+        margin: 5px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .detailsimg {
+        font-family: "Ubuntu", sans-serif;
+        display: flex;
+        flex-direction: column;
+        color: black;
+        border-radius: 5px;
+        padding: 20px;
+        width: 30%;
+        font-size: 30px;
+        display: inline-block;
+        background: white;
+        text-align: center;
+        box-shadow: 0px 0px 25px 0px rgba(45, 69, 95, 0.10)
+    }
+    
+    .image-box {
+        height: auto;
+    }
+    
+    .img-fluid {
+        max-width: 12vw !important;
+        height: 12vw !important;
+    }
+    
+    .imgsquare {
+        border-radius: 50%;
+        display: inline-block;
+    }
+    
+    .titlediv {
+        font-size: xx-large;
+        display: inline-block;
+        text-transform: capitalize;
+        margin: 0px;
+    }
+    
+    .unamediv {
+        font-size: medium;
+        color: grey;
+        padding: 0px;
+    }
+    
+    .joindate {
+        font-size: medium;
+        color: grey;
+    }
+    
+    .changepicbtn {
+        text-decoration: none;
+        font-size: 10px;
+        float: left;
+    }
+    
+    .logoutbtn {
+        text-decoration: none;
+        float: right;
+    }
+    /*top and bottom padding are 8px right and left padding are 10px */
+    
+    #changepic {
+        margin-top: 10px;
+        font-size: 15px;
+    }
+    
+    .detailsdata {
+        font-family: "Ubuntu", sans-serif;
+        display: flex;
+        flex-direction: column;
+        color: black;
+        border-radius: 5px;
+        padding: 20px;
+        width: 67%;
+        background: white;
+        box-shadow: 0px 0px 25px 0px rgba(45, 69, 95, 0.10)
+    }
+    /*     
+    .pswbtn {
+        width: 25%;
+        margin-left: 46%;
+    } */
+    /* .editbtn {
+        width: 15%;
+        margin-left: 10%;
+    } */
+    
+    .detailcancel {
+        margin-left: 84%;
+    }
+    
+    .detailsetc {
+        width: 100%;
+        margin-top: 0px;
+    }
+    
+    .detailsdiv {
+        font-size: 19px;
+        background: white;
+    }
+    
+    .attrdiv hr {
+        width: 100%;
+        margin: 0em;
+    }
+    
+    .inputtext {
+        border: none;
+        /* border-bottom: 1px solid grey; */
+    }
+    
+    .updatebtn {
+        margin-left: 80%;
+        margin-top: 30px;
+    }
+    
+    #changepicsect {
+        display: none;
+    }
+    
+    .submitbtn {
+        float: right;
+        margin: 5px;
+    }
+    
+    .formcancelbtn {
+        float: left;
+        margin: 5px;
+    }
+    
+    #modalclosebtn {
+        text-align: right;
+        margin-right: 0px;
+        font-size: 30px;
+        border: none;
+    }
+    
+    #changepswlabel {
+        text-align: center;
+    }
+    
+    .changepswbtn {
+        color: white;
+    }
+    
+    .alert {
+        margin-top: 20px;
+    }
+    
+    @media only screen and (max-width: 400px) {
+        /* For mobile phone: */
+        body {
+            padding: 0px;
+            background: none;
+            min-height: auto;
+        }
+        .aboutcontainer {
+            width: 100vw;
+            padding: 0px;
+            margin-top: 45px;
+        }
+        .profilesec {
+            margin-bottom: 0px;
+            margin-top: 0px;
+        }
+        .changepswbtn {
+            font-size: .700rem !important;
+        }
+        .editbtn {
+            font-size: .700rem !important;
+            margin-top: 5px;
+        }
+        .changepicbtn {
+            font-size: .700rem !important;
+        }
+        .logoutbtn {
+            font-size: .700rem !important;
+            margin-top: 5px;
+        }
+        .detailcancel {
+            font-size: .700rem !important;
+            margin-left: auto;
+        }
+        .updatebtn {
+            font-size: .700rem !important;
+            margin-left: auto;
+        }
+        .modal {
+            width: 80%;
+        }
+        .attr {
+            font-weight: bold;
+            font-size: 2.8vw;
+        }
+        .title {
+            font-size: 2.5vw;
+        }
+        .mattr {
+            font-weight: bold;
+            font-size: 2.8vw;
+        }
+        .mtitle {
+            font-size: 2.8vw;
+        }
+        .submitbtn {
+            float: none;
+            margin: 2px;
+        }
+        .picinp {
+            font-size: .700rem !important;
+        }
+        .inpfield {
+            padding: 0px;
+            height: 4px;
+        }
+        .alert {
+            margin: 0px;
+        }
+        /* .detailsdata {}*/
+        .detailsbtnandform {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+        /* .detailsetc {
+            order: 1;
+        } */
+        .editandpdswbtn {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+    }

@@ -1,0 +1,97 @@
+{% extends 'base.html' %} {% load static %} {% block content%}
+<title>Scooters | ElectroVec</title>
+
+<head>
+  <style>
+    body {
+      background: #43c6ac;
+      background: -webkit-linear-gradient(to right, #191654, #43c6ac);
+      background: linear-gradient(to right, #191654, #43c6ac);
+      min-height: 100vh;
+    }
+
+    .text-gray {
+      color: #aaa;
+    }
+
+    img {
+      margin-right: -5px;
+      margin-top: -30%;
+      float: right;
+      width: 350px;
+    }
+  </style>
+</head>
+<div class="container py-5">
+  <div class="row text-center text-white mb-5">
+    <div class="col-lg-7 mx-auto">
+      <h1 class="display-4">Scooters</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+      <!-- List group-->
+      <ul class="list-group shadow">
+        <!-- list group item-->
+        {% for s in all_scooters %}
+        <li class="list-group-item">
+          <!-- Custom content-->
+          <div class="row media align-items-lg-center flex-column flex-lg-row">
+            <div class="col-12 col-sm-6 media-body order-2 order-lg-1">
+              <h5 class="mt-0 font-weight-bold mb-2" style="padding-top: 20px">
+                <a
+                  href="/show_details/{{s.id}}"
+                  style="color: black; text-decoration: none"
+                  >{{ s.name }}</a
+                >
+              </h5>
+              <p class="font-italic text-muted mb-0 small">
+                <strong
+                  >Range: {{s.range}} | Top Speed: {{s.top_speed}}
+                </strong>
+              </p>
+              <p class="font-italic text-muted mb-0 small">
+                <strong>Charging: {{s.charging_time}} | {{s.offers}}</strong>
+              </p>
+              <br />
+              <p class="font-italic text-muted mb-0 small">
+                {{s.description|slice:"0:44"}}
+              </p>
+              <p class="font-italic text-muted mb-0 small">
+                {{s.description|slice:"45:87"}}...
+              </p>
+              <br />
+              <h6 class="font-weight-bold my-2">{{s.price}}</h6>
+              <div class="rating">
+                <div class="stars">
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star"></span>
+                </div>
+                <span class="review-no">95 reviews</span>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 order-1 order-sm-2">
+              <a href="/show_details/{{s.id}}">
+                <img
+                  src="{{ s.frontimg.url }}"
+                  alt="scooters image"
+                  width="200"
+                  class="m-auto ml-lg-5 img-fluid py-auto"
+                />
+              </a>
+            </div>
+          </div>
+          <!-- End -->
+        </li>
+        <br />
+        <!-- End -->
+        {% endfor %}
+      </ul>
+      <!-- End -->
+    </div>
+  </div>
+</div>
+{% endblock %}

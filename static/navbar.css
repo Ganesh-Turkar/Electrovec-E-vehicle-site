@@ -1,0 +1,345 @@
+    /* body {
+    margin: 0;
+    font-family: Arial;
+    padding-top: 27px;
+    padding-bottom: 50px;
+} */
+    
+    nav {
+        background: rgba(27, 35, 47, 1);
+        z-index: 3;
+    }
+    /* 
+nav {
+    z-index: 3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
+    padding: 10px 75px;
+    box-sizing: border-box;
+    background: transparent;
+    background: rgba(27, 35, 47, 1);
+    /* overflow: hidden;
+
+
+} */
+    
+    nav .logo {
+        font-family: 'Lucida Sans';
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #fff;
+    }
+    /*
+nav ul {
+    padding: 18px 28px;
+    height: 50px;
+    list-style: none;
+    float: right;
+    margin: 0;
+    display: flex;
+}
+
+nav ul li a,
+.more {
+    color: #fff;
+    padding: 10px 30px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+nav ul li a:hover {
+    background-color: rgb(3, 155, 135);
+    border-radius: 9px;
+    color: #fff;
+    text-decoration: none;
+}
+
+*/
+    /* dropdown css start */
+    /* 
+.dropdown-content a:hover {
+    background-color: rgb(172, 255, 244);
+    border-radius: 0px;
+    color: #fff;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.more:hover {
+    background-color: rgb(3, 155, 135);
+    border-radius: 9px;
+    color: #fff;
+}
+
+.dropdown-content {
+    margin-top: 8px;
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 158px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: rgb(3, 155, 135);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: rgb(3, 155, 135)
+}
+
+.navlogoutbtn:hover {
+    background-color: rgb(248, 30, 23);
+    border-radius: 9px;
+    color: #fff;
+} */
+    
+    .carousel-item img {
+        filter: brightness(90%);
+    }
+    /*for item list  */
+    
+    .featured {
+        /* background-color: rgba(219, 238, 250, 0.993); */
+        text-align: center;
+        font-size: 40px;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        padding-top: 30px;
+    }
+    
+    .vehicle_section {
+        background-color: rgba(219, 238, 250, 0.616);
+    }
+    /* footer css */
+    
+    .site-footer {
+        background-color: rgba(27, 35, 47, 1);
+        padding: 45px 0 20px;
+        font-size: 15px;
+        line-height: 24px;
+        color: #737373;
+    }
+    
+    .site-footer hr {
+        border-top-color: #bbb;
+        opacity: 0.5
+    }
+    
+    .site-footer hr.small {
+        margin: 20px 0
+    }
+    
+    .site-footer h6 {
+        color: #fff;
+        font-size: 16px;
+        text-transform: uppercase;
+        margin-top: 5px;
+        letter-spacing: 2px
+    }
+    
+    .site-footer a {
+        color: #737373;
+    }
+    
+    .site-footer a:hover {
+        color: #3366cc;
+        text-decoration: none;
+    }
+    
+    .footer-links {
+        padding-left: 0;
+        list-style: none
+    }
+    
+    .footer-links li {
+        display: block
+    }
+    
+    .footer-links a {
+        color: #737373
+    }
+    
+    .footer-links a:active,
+    .footer-links a:focus,
+    .footer-links a:hover {
+        color: #3366cc;
+        text-decoration: none;
+    }
+    
+    .footer-links.inline li {
+        display: inline-block
+    }
+    
+    .site-footer .social-icons {
+        text-align: right
+    }
+    
+    .site-footer .social-icons a {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        margin-left: 6px;
+        margin-right: 0;
+        border-radius: 100%;
+        background-color: #33353d
+    }
+    
+    .copyright-text {
+        margin: 0
+    }
+    
+    @media (max-width:991px) {
+        .site-footer [class^=col-] {
+            margin-bottom: 30px
+        }
+    }
+    
+    @media (max-width:767px) {
+        .site-footer {
+            padding-bottom: 0
+        }
+        .site-footer .copyright-text,
+        .site-footer .social-icons {
+            text-align: center
+        }
+    }
+    
+    .social-icons {
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none
+    }
+    
+    .social-icons li {
+        display: inline-block;
+        margin-bottom: 4px
+    }
+    
+    .social-icons li.title {
+        margin-right: 15px;
+        text-transform: uppercase;
+        color: #96a2b2;
+        font-weight: 700;
+        font-size: 13px
+    }
+    
+    .social-icons a {
+        background-color: #eceeef;
+        color: #818a91;
+        font-size: 16px;
+        display: inline-block;
+        line-height: 44px;
+        width: 44px;
+        height: 44px;
+        text-align: center;
+        margin-right: 8px;
+        border-radius: 100%;
+        -webkit-transition: all .2s linear;
+        -o-transition: all .2s linear;
+        transition: all .2s linear
+    }
+    
+    .social-icons a:active,
+    .social-icons a:focus,
+    .social-icons a:hover {
+        color: #fff;
+        background-color: #29aafe
+    }
+    
+    .social-icons.size-sm a {
+        line-height: 34px;
+        height: 34px;
+        width: 34px;
+        font-size: 14px
+    }
+    
+    .social-icons a.facebook:hover {
+        background-color: #3b5998
+    }
+    
+    .social-icons a.twitter:hover {
+        background-color: #00aced
+    }
+    
+    .social-icons a.linkedin:hover {
+        background-color: #007bb6
+    }
+    
+    .social-icons a.dribbble:hover {
+        background-color: #ea4c89
+    }
+    
+    @media (max-width:767px) {
+        .social-icons li.title {
+            display: block;
+            margin-right: 0;
+            font-weight: 600
+        }
+    }
+    
+    @media only screen and (max-width: 400px) {
+        /* For mobile phone: */
+        .site-footer h6 {
+            font-size: 7px;
+            margin-top: 0px;
+            letter-spacing: 1px;
+            margin-bottom: 0px !important;
+        }
+        .site-footer p {
+            font-size: 7px;
+            line-height: 11px;
+        }
+        .footer-links a {
+            font-size: 7px;
+        }
+        .qlinks,
+        .aboutftr,
+        .categrftr,
+        .copyrightftr {
+            margin-bottom: 0px !important;
+        }
+        .footer-links li {
+            height: 10px;
+        }
+        .social-icons li {
+            margin-bottom: 0px
+        }
+        .scliconsftr {
+            margin-bottom: 24px !important;
+        }
+        .social-icons a {
+            font-size: 8px;
+            line-height: 22px;
+            width: 22px;
+            height: 22px;
+            text-align: center;
+        }
+        .site-footer .social-icons a {
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+        }
+        .site-footer {
+            bottom: 0px;
+        }
+    }

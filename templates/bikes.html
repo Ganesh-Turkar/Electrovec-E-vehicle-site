@@ -1,0 +1,76 @@
+{% extends 'base.html' %} {% load static %} {% block content%}
+<title>Bikes | ElectroVec</title>
+
+<head>
+  <link rel="stylesheet" href="{% static 'bikes.css' %}" />
+</head>
+<div class="container py-5">
+  <div class="row text-center text-white mb-5">
+    <div class="col-lg-7 mx-auto">
+      <h1 class="display-4">Bikes</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+      <!-- List group-->
+      <ul class="list-group shadow">
+        <!-- list group item-->
+        {% for b in all_bikes %}
+        <li class="list-group-item">
+          <!-- Custom content-->
+          <div class="row media align-items-lg-center flex-column flex-lg-row">
+            <div class="col-12 col-sm-6 media-body order-2 order-lg-1">
+              <h5 class="mt-0 mb-2 py-2">
+                <a href="/show_details/{{b.id}}" class="vname">{{ b.name }}</a>
+              </h5>
+              <p class="font-italic text-muted mb-0 small">
+                <strong
+                  >Range: {{b.range}} | Top Speed: {{b.top_speed}}
+                </strong>
+              </p>
+              <p class="font-italic text-muted mb-0 small">
+                <strong>Charging: {{b.charging_time}} | {{b.offers}}</strong>
+              </p>
+              <br />
+              <p class="font-italic text-muted mb-0 small">
+                {{b.description|slice:"0:44"}}
+              </p>
+              <p class="font-italic text-muted mb-0 small">
+                {{b.description|slice:"45:87"}}...
+              </p>
+              <br />
+              <h6 class="font-weight-bold my-2">{{b.price}}</h6>
+              <div class="rating">
+                <div class="stars">
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star"></span>
+                </div>
+                <span class="review-no">61 reviews</span>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 order-1 order-sm-2">
+              <a href="/show_details/{{b.id}}">
+                <img
+                  src="{{ b.frontimg.url }}"
+                  alt="bikes image"
+                  width="200"
+                  class="m-auto ml-lg-5 img-fluid py-auto"
+                />
+              </a>
+            </div>
+          </div>
+          <!-- End -->
+        </li>
+        <br />
+        <!-- End -->
+        {% endfor %}
+      </ul>
+      <!-- End -->
+    </div>
+  </div>
+</div>
+{% endblock %}

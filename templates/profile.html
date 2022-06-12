@@ -1,0 +1,317 @@
+{% extends 'base.html' %} {% load static %}{% block content %}
+
+<head>
+  <title>Edit Profile | ElectroVec</title>
+  <link rel="stylesheet" href="{% static 'profile.css' %}" />
+  <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+  crossorigin="anonymous"
+/> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="aboutcontainer">
+    {% if messages %}
+        <ul class="messages mt-1">
+            {% for message in messages %}
+                <div class="alert alert-success" style="margin-left:-18px;" role="alert">
+               {{ message }}
+              </div>
+            {% endfor %}
+        </ul>
+        {% endif %}
+   
+    <div class="profilesec pt-0 pt-sm-5">
+        <div class="details" style="width: 100%">
+          <hr>  
+          <h2 class="profileheading"> Profile </h2>      
+          <hr>
+              <div class="row-cols-lg-2 row-cols-md-1 row-cols-1 imganddetails">
+                {% comment %} img section starts {% endcomment %}
+                <div class="col-lg-4 col-md-11 col-12  detailsimg"> 
+                  <div class="image-box">
+                     {% if userdetail.profile_pic %}
+                    <img class="img-fluid imgsquare" src="{{ userdetail.profile_pic.url }}" alt="fatch error" >
+                    {% else %}
+                    <img class="img-fluid square imgsquare" src={% static "icons-user.png" %} alt="Image Description" width="140" height="140">
+                    {% endif%}
+                  </div> 
+                  <div class="nameetc">
+                    {% if userdetail.name %}
+                      <div class="titlediv" ><span class="card-title"> {{ userdetail.name }} </span>
+                      </div>
+                      {% else %}
+                      <div class="titlediv" ><span class="card-title"> no name </span>
+                      </div>
+                      {% endif%}
+                      
+                      <div class="card-subtitle unamediv" ><span> @{{ user.username }} </span>
+                      </div>
+                      {% if userdetail.name %}
+                      <div class="title"><span class="joindate" >joined on {{ userdetail.date_created|date:'d N Y' }} </span> 
+                      </div>
+                      {% else %}
+                      <div><span class="card-subtitle joindate" >joined on not known </span> 
+                      </div>
+                      {% endif%}
+                      <div class="row  justify-content-center">
+                        <div class="col-12 col-sm-6 ps-sm-4">
+                          <span ><button class="col-12 col-sm-auto btn btn-primary btn-sm  changepicbtn p-0 p-sm-1" id="changepicbtn" type="button" onclick="changepic()"> <i class="fa fa-fw fa-camera"></i> <span>Change Pic&nbsp; </span> </button></span>
+                        </div>
+                        <div class="col-12 col-sm-5 pe-sm-4">
+                          <span><a href="/logout" ><button class="col-12 col-sm-auto btn btn-block btn-secondary btn-sm logoutbtn p-0 p-sm-1" id="logoutbtn" > <i class="fa fa-sign-out"></i> <span>Logout</span> </button></a></span>
+                        </div>
+                      
+                        {% comment %} img change {% endcomment %}
+                        <div id="changepicsect" >
+                          <form action="/update_details/changepic" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}  
+                            
+                              <input type="file" id="img" name="img" class="form-control picinp" required>
+                              <div class="row">
+                              <div class="col-12 col-sm-7 ps-sm-5">
+                              <button class="col-12 col-sm-auto btn btn-danger formcancelbtn btn-sm p-0 p-sm-1" type="button"  onclick="cancelchangepic()">Cancel<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                              </svg></button>
+                              </div>
+                              <div class="col-12 col-sm-5 pe-sm-4">
+                              <button class="col-12 col-sm-auto btn btn-primary btn-sm submitbtn p-0 p-sm-1" type="submit" value="Send" >Submit pic</button>
+                              </div>
+                            </div>
+                            </form>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                {% comment %} image box ends here {% endcomment %}
+                <div class= "col-lg-7 col-md-11 col-12  detailsdata" >
+                  {% comment %} show details starts {% endcomment %}
+                  <div id="showdetails"  class="detailsbtnandform" >
+                    <div class="row justify-content-end editandpdswbtn">
+                      <div class="col-12 col-sm-auto pswbtn">
+                        {% comment %} change psw {% endcomment %}
+                        <button class="col-12 col-sm-auto btn btn-info btn-sm changepsw p-0 p-sm-1" id="changepswbtn" type="button" data-toggle="modal" data-target="#pswdiv"> <i class="fa fa-fw fa-lock fa"></i> <span class="changepswbtn">Change Password&nbsp; </span> </button>
+                      </div>
+                      <!-- Modal -->
+                        <div class="modal fade" id="pswdiv" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <form action="/update_details/changepsw" method="post">
+                            {% csrf_token %}  
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header justify-content-center bg-info">
+                                <h2 class="modal-title" id="changepswlabel">Change password </h2>
+                                <button type="button" class="close bg-info" id="modalclosebtn" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div ><span id="pswerrormsg" style="margin-left:20%;color:red"></span> </div>
+                                <div class="row" id="pswdiv">
+                                  {% comment %}cnf change psw {% endcomment %}
+                                  <span class="col-4 mattr">New Password</span>
+                                  <span class="col-7 text-secondary mtitle"> <input class="inputtext1" type="text" size="27" name="psw" id="psw" class="form-control" placeholder="Enter your new password"> </span>
+                                </div> 
+                                <div class="row" id="cnfpswdiv">
+                                  {% comment %}cnf change psw {% endcomment %}
+                                  <span class="col-4 mattr">Confirm Password</span>
+                                  <span class="col-7 text-secondary mtitle"> <input class="inputtext1" type="text" size="27" name="cnfpsw" id="cnfpsw" onkeyup="compare_psw()" class="form-control" placeholder="Re-enter your new password"> </span>
+            
+                                </div> 
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary" id="savepsw" disabled=true>Save changes</button>
+                              </div>
+                            </div>
+                          </div>
+                        </form> 
+                        </div>
+                      {% comment %} change psw ends here {% endcomment %}
+
+                      <div class="col-12  col-sm-auto" id="editbtn" >
+                        <button type="button" onclick="editdetail()" class="col-12 col-sm-auto btn btn-primary btn-sm editbtn p-0 p-sm-1"  data-toggle="collapse" data-target="#name" ><span>Edit </span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                          <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="detailsetc" >
+                      <div class="detailsdiv" >
+                        <div class="row attrdiv mt-4 mb-3" >
+                              <span class="col-3 attr">Name</span>
+                              <span class="col-8 text-secondary title"> {{ userdetail.name }} </span>  
+                              <div> <hr ></div> 
+                        </div> 
+                        <div class="row attrdiv mb-3">
+                              <span class="col-3 attr">Username</span>
+                              <span class="col-8 text-secondary title"> {{ user.username }} </span>
+                              <div> <hr ></div> 
+                        </div>
+                        <div class="row attrdiv mb-3">
+                              <span class="col-3 attr">Phone</span>
+                              <span class="col-8 text-secondary title"> {{ userdetail.phone }} </span>
+                              <div> <hr ></div> 
+                        </div>
+                        <div class="row attrdiv mb-3">
+                            <span class="col-3  attr">Email</span>
+                            <span class="col-8 text-secondary title"> {{ user.email }} </span>
+                            <div> <hr ></div> 
+                        </div>
+                      </div>   
+                    </div>
+                  </div>
+                  {% comment %} show details ends {% endcomment %}
+                  <div class="editdetails" id="editdetails">
+                    <form action="/update_details/changedetails" method="post">
+                      {% csrf_token %}  
+                      <div class="col-12  col-sm-auto detailcancel " >
+                        <button type="button" onclick="showdetail()" class="col-12 col-sm-auto btn btn-danger btn-sm p-0 p-sm-1"><span>Cancel</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                          <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg></button>
+                      </div>
+
+                      <div class="detailsetc" >
+                        <div class="detailsdiv mt-2">
+                          <div class="row attrdiv" >
+                                <span class="col-3 col-sm-3 attr form-label">Name</span>
+                                <span class="col-8 col-sm-8 text-secondary mtitle"> <input class="form-control inpfield" type="text" name="name" value=" {{ userdetail.name }} "></span>  
+                                
+                          </div> 
+                          <div class="row attrdiv">
+                                <span class="col-3 col-sm-3 attr form-label">Username</span>
+                                <span class="col-8 col-sm-8 text-secondary title">  <input class="form-control inpfield" type="text" name="uname" value=" {{ user.username }} "></span>
+                               
+                          </div>
+                          <div class="row attrdiv">
+                                <span class="col-3 col-sm-3 attr form-label">Phone</span> 
+                                <span class="col-8 col-sm-8 text-secondary title"> <input class="form-control inpfield" type="text" name="phone" value=" {{ userdetail.phone }} "> </span>
+                                
+                          </div>
+                          <div class="row attrdiv">
+                              <span class="col-3 col-sm-3 attr form-label">Email</span>
+                              <span class="col-8 col-sm-8 text-secondary title"> <input class="form-control inpfield" type="text" name="email" value=" {{ user.email }} " > </span>
+                             
+                          </div>
+                          
+                        </div>   
+                      </div>
+
+                      <div class="col-12  col-sm-auto updatebtn">  
+                        <button  type="submit" id ="submit" class="col-12 col-sm-auto btn btn-primary btn-sm p-0 p-sm-1" ><span>Update </span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                          <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                          </svg></button>
+                      </div>
+                    </form>  
+                  </div>
+                </div>
+                  {% comment %} details end here {% endcomment %}       
+             {% comment %} main div ends below {% endcomment %}
+              </div>
+              {% comment %} profile uper part ends here {% endcomment %}
+      <br />
+      <br />
+    </div>
+  </div>
+</div>
+</br>
+
+<script>
+  function editdetail() {
+    document.getElementById('showdetails').style.display = "none";
+    document.getElementById('editdetails').style.display = "block";
+  }
+  function showdetail() {
+    document.getElementById('showdetails').style.display = "block";
+    document.getElementById('editdetails').style.display = "none";
+  }
+  function changepic() {
+    document.getElementById('changepicbtn').style.display = "none";
+    document.getElementById('logoutbtn').style.display = "none";
+    document.getElementById('changepicsect').style.display = "block";
+  }
+  function cancelchangepic() {
+    document.getElementById('changepicbtn').style.display = "block";
+    document.getElementById('logoutbtn').style.display = "block";
+    document.getElementById('changepicsect').style.display = "none";
+  }
+  function compare_psw(){
+    var psw=document.getElementById('psw').value;
+    var cnfpsw=document.getElementById('cnfpsw').value;
+    if (psw!=cnfpsw){
+      document.getElementById("pswerrormsg").innerHTML = "**Password does not match"; 
+      document.getElementById("savepsw").disabled = true;
+    }
+    else if (psw == "") {  
+      document.getElementById("pswerrormsg").innerHTML = "**Fill the password please!";  
+      document.getElementById("savepsw").disabled = true;
+    }
+    else if (psw.length < 8) {
+      document.getElementById("pswerrormsg").innerHTML = "**Password length must be atleast 8 characters'"; 
+      document.getElementById("savepsw").disabled = true;
+    }
+    else if (psw.length > 15){
+      document.getElementById("pswerrormsg").innerHTML = "**Password length must not exceed 15 characters"; 
+      document.getElementById("savepsw").disabled = true;
+    }
+    else{
+      document.getElementById("pswerrormsg").innerHTML = ""; 
+      document.getElementById("savepsw").disabled = false;
+    }
+  }
+  </script>
+  {% comment %} <script type="text/javascript">
+    
+    $('#submit').click(function(){ 
+
+      var name = $('[name=name]').val();
+      var uname = $('[name=uname]').val();
+      var phone = $('[name=phone]').val();
+      var email = $('[name=email]').val();
+      //alert("Hello!" + name);
+
+    $.ajax( 
+    { 
+        type:"GET", 
+        url: "update_details", 
+        data:{ 
+          name:name ,
+          uname=uname,
+          phone=phone,
+          email= email
+          }, 
+    success: function( data ) 
+    {     alert("Hello!" + name);
+      /* 
+        //$('#heart').css("color", "red");
+        var count;
+        count = $(".likebutton").attr("value");  
+        
+        if (count > 0) {
+            
+            $(".likebutton").attr("value",0);
+            $("#heart").css("color", "white");
+          } else {
+            $(".likebutton").attr("value",1);
+            $("#heart").css("color", "red");
+          } */
+          },
+   
+    }) });
+    $(document).ready(function(){
+    //alert("Hello!" + $(".likebutton").attr("value"));
+    var count1;
+    count1 = $(".likebutton").attr("value"); 
+    if (count1 > 0) {
+        $("#heart").css("color", "red");
+      } else {
+        $("#heart").css("color", "white");
+      }
+    },);
+    </script> {% endcomment %}
+</body>
+
+{% endblock %}

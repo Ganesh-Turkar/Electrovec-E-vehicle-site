@@ -1,0 +1,140 @@
+{% extends 'base.html' %}{% load static %} {% block content %}
+
+
+  <head>
+
+    <title>Cart | ElectroVec</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+      <link rel="stylesheet" type="text/css" href="{% static 'wishlist.css' %}">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,900" rel="stylesheet">   {% comment %} cart taken{% endcomment %}
+    </head>
+     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
+
+      @media screen and (max-width: 780px) {
+        .details {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+
+<body>
+  </br>
+  <div class="wishlistcontainer py-4 mt-3">
+    <div class="row text-center text-white ">
+      <div class="col-lg-7 mx-auto">
+        <h1 class="display-4">Wishlist</h1>
+      </div>
+    </div>
+   
+    <div class="wishlistcontainer" >
+      <div class="wishlistdiv">
+        <div class="details" >
+          <div class="contact-items-wrapper">
+        
+                  {% comment %} from this {% endcomment %}
+                  <div class="CartContainer">
+             
+                    {% if cartlen >= 1 %}
+                      {% comment %} <h3 class="Heading">Shopping Cart</h3> {% endcomment %}
+                      {% comment %} <h5 class="Action">Remove all</h5> {% endcomment %}
+                    </br>
+                    {% for i in cart_item %} 
+
+                    <div class="row my-sm-4">
+                      <div class="col col-sm-4 px-3  px-sm-5 py-sm-1">
+                        {% if i.vehicle.frontimg %}
+                        <a href="/show_details/{{i.vehicle.id}}" >
+                          <img class="img-fluid rounded" src="{{ i.vehicle.frontimg.url }}" alt="img"  />
+                        </a >
+                        {% else %}
+                        <a href="/show_details/{{i.vehicle.id}}">
+                          <img class="img-fluid rounded" src="{% static 'bikes/revolt1.webp' %}" alt="img"  />
+                        </a >
+                        {% endif %}
+                      </div>
+                      <div class="col col-sm-4 ps-1 ps-sm-5  align-self-top">
+                        <div>
+                          <a href="/show_details/{{i.vehicle.id}}" style="color: black; text-decoration: none" >
+                            <h1 class="title">{{ i.vehicle }} </h1>
+                          </a >
+                        </div>
+                        <div>
+                          <h3 class="subtitle">{{ i.vehicle.offers }}</h3>
+                        </div> 
+                      </div>
+                      <div class="col col-sm-4 pe-3  pe-sm-4  price">
+                        <div class="amount">
+                          {{ i.vehicle.price }}
+                        </div>
+                        <a href="/addfav/{{i.vehicle.id}}/del">
+                          <div class="remove"> 
+                            <u>Remove</u>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  
+
+
+
+
+
+
+                    {% comment %} <div class="Cart-Items">
+                        <div class="image-box">
+                          {% if i.vehicle.frontimg %}
+                          <a href="/show_details/{{i.vehicle.id}}" >
+                          <img src="{{ i.vehicle.frontimg.url }}" alt="img"  width="220px" />
+                        </a >
+                          {% else %}
+                          <a href="/show_details/{{i.vehicle.id}}">
+                          <img src="{% static 'bikes/revolt1.webp' %}" alt="img" width="220px" />
+                        </a >
+                          {% endif %}
+
+                        </div>
+                        <div class="about">
+                          <a href="/show_details/{{i.vehicle.id}}"
+                      style="color: black; text-decoration: none"
+                      ><h1 class="title">{{ i.vehicle }} </h1></a >
+                              
+                          <h3 class="subtitle">{{ i.vehicle.offers }}</h3>
+                          
+                        </div>
+                        <div class="prices">
+                          <div class="amount">{{ i.vehicle.price }}</div>
+                          {% comment %} <div class="save"><u>Save for later</u></div> {% endcomment %}
+                          {% comment %}
+                          <a href="/addfav/{{i.vehicle.id}}/del"><div class="remove"> <u>Remove</u></div></a>
+                                </div>
+                            </div>
+                            {% endcomment %}
+                        {% endfor %}
+
+                        {% else %}
+                          <h3 style="color:black;text-align:center;">You have not added any vehicle to Wishlist</h3>
+                        {% endif %}
+                          <hr> 
+                  </div>
+         
+          </div>
+        </div>
+        <br />
+ 
+      </div>
+    </div>
+  </div>  
+
+</body>
+
+
+{% endblock %}

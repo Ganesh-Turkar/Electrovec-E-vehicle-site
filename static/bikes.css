@@ -1,0 +1,25 @@
+body {
+    background: #43c6ac;
+    background: -webkit-linear-gradient(to right, #191654, #43c6ac);
+    background: linear-gradient(to right, #191654, #43c6ac);
+    min-height: 100vh;
+}
+
+.text-gray {
+    color: #aaa;
+}
+
+img {
+    margin-right: -5px;
+    margin-top: -30%;
+    float: right;
+    width: 350px;
+}
+
+.vname {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Bebas Neue', cursive;
+}

@@ -1,0 +1,199 @@
+{% extends 'base.html' %}{% load static %}
+{% block content %}
+
+<title>News | ElectroVec</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
+      body {
+        padding-top: 10vh;
+        background:#DCDCDC;
+        width:100%;
+        
+      }
+
+      .newscontainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: auto;
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 15px;
+      }
+
+      h2 {
+        color: #403333;
+      }
+      .details {
+        font-family: "Ubuntu", sans-serif;
+        display: flex;
+        flex-direction: column;
+        width: 85%;
+        color: #DCDCDC;
+        border-radius: 5px;
+        padding: 7px;
+        
+      }
+      .newstitle{
+        font-size:1.3vw ;
+      }
+      .details h3 {
+        text-align: center;
+      }
+
+      p {
+        text-align: justify;
+        text-justify: inter-word;
+        font-size: 15px;
+        margin-left: 85px;
+        margin-right: 85px;
+      }
+
+      .details p a {
+        color: white;
+      }
+      .details p a:hover {
+        color: rgb(160, 154, 154);
+      }
+
+      .button-70 {
+        background-image: linear-gradient(#0dccea, #0d70ea);
+        border: 0;
+        border-radius: 4px;
+        box-shadow: rgba(0, 0, 0, .3) 0 5px 15px;
+        box-sizing: border-box;
+        color: #fff;
+        cursor: pointer;
+        font-family: Montserrat,sans-serif;
+        font-size: .9em;
+        margin: 5px;
+        padding: 10px 15px;
+        text-align: center;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+      }
+      @media only screen and (max-width: 450px) {
+        .details{
+        width:100%;
+        }
+        .newstitle {
+          font-size:3.5vw !important;
+        }
+        .newsauther, .ndescription, .ncontent{
+          font-size:3.0vw !important;
+        }
+        
+        
+      }
+     
+     
+    </style>
+  </head>
+
+  <body>
+    <div class="newscontainer">
+      <h1 class="text-dark display-4">News</h1>
+   
+      <div class="news-info m-auto">
+        <div class="details m-auto " >
+          <h3 class="text-dark ">Latest News About E-Vehicles</h3>
+         
+          <div class="news-items-wrapper">
+          
+            {% for i in page_obj %}
+            <div
+              class="news-items m-0 m-sm-3"
+              style="background: white; color: black;border-radius: 6px; box-shadow: 0 0 15px rgba(27, 35, 47, 1);"
+            >
+            <div class="news-items m-2 m-sm-3 pt-1 pt-sm-2">
+              <span class="newstitle" style="font-weight: bold;" >
+                <a href="{{i.url}}" style="color: blue" target="_blank"
+                > {{ i.title }} </a>
+              </span>
+              {% if i.author %}
+              <span class="newsauther ms-2" style="font-weight: 50; display: inline-block;">
+                {{i.author}}
+              </span>
+              {% endif%}
+            </div>
+              {% if i.description %}
+              <p class="ndescription mx-2 my-0 mx-sm-3 my-sm-0"
+                style="
+                  
+                  text-align: justify;
+                  text-justify: inter-word;
+                "
+              >
+                {{i.description}}
+              </p>
+              {% endif%}
+              {% if i.content %}
+              <p class="ncontent mx-2 mx-sm-3 "
+                style=" text-align: justify;
+                  text-justify: inter-word;
+                "
+              >
+                {{i.content}}
+                {% endif%}
+                <a href="{{i.url}}" style="color: blue" target="_blank"
+                  >Show more</a>
+              </p>
+            </div>
+            {% endfor %}
+          </div>
+        </br>
+   
+        <div class="pagination"  >
+          <span class="step-links" style="text-align: center; margin: 0 auto;">
+              {% if page_obj.has_previous %}
+                  {% comment %} <a href="?page=1"> <button class="button-70" type="button" >
+                    First 
+                  </button></a> {% endcomment %}
+                  <a href="?page={{ page_obj.previous_page_number }}"><button class="button-70" type="button" >
+                    Previous 
+                  </button></a>
+              {% endif %}
+            {% comment %} 
+              <span class="current">
+                  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+              </span>
+              {% endcomment %}
+              {% for j in total_pages %}
+              {% if j == page_obj.number %}
+              <a href="?page={{ j }}"><button class="button-70" type="button" style="color:black; background:white;">
+                {{ j }}
+              </button></a>
+               {% else %}
+              <a href="?page={{ j }}"><button class="button-70" type="button" style="color:black;">
+                {{ j }}
+              </button></a>
+              {% endif %}
+              {% endfor %}
+              
+              {% if page_obj.has_next %}
+                  <a href="?page={{ page_obj.next_page_number }}"><button class="button-70" type="button" >
+                    Next 
+                  </button></a>
+                  {% comment %} <a href="?page={{ page_obj.paginator.num_pages }}"><button class="button-70" type="button" >
+                    Last 
+                  </button> </a> {% endcomment %}
+              {% endif %}
+          </span>
+        </div>
+        </div>
+        <br />
+      </div>
+    </div>
+
+  </body>
+{% endblock %}
