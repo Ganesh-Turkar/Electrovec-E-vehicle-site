@@ -43,19 +43,18 @@
                     {% if userdetail.name %}
                       <div class="titlediv" ><span class="card-title"> {{ userdetail.name }} </span>
                       </div>
+                      <div class="card-subtitle unamediv" ><span> @{{ user.username }} </span>
+                      </div>
                       {% else %}
-                      <div class="titlediv" ><span class="card-title"> no name </span>
+                      <div class="titlediv" ><span> {{ user.username }} </span>
                       </div>
                       {% endif%}
                       
-                      <div class="card-subtitle unamediv" ><span> @{{ user.username }} </span>
-                      </div>
-                      {% if userdetail.name %}
+                      
+                      {% if userdetail.date_created %}
                       <div class="title"><span class="joindate" >joined on {{ userdetail.date_created|date:'d N Y' }} </span> 
                       </div>
-                      {% else %}
-                      <div><span class="card-subtitle joindate" >joined on not known </span> 
-                      </div>
+                      
                       {% endif%}
                       <div class="row  justify-content-center">
                         <div class="col-12 col-sm-6 ps-sm-4">

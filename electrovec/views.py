@@ -37,6 +37,9 @@ def register_page(request):
             if form.is_valid():
                 form.save()
                 user = form.cleaned_data.get('username')
+                current_user = User.objects.get(username=user)
+                new_user = UserDetail(user=current_user)
+                new_user.save()  # to add in userdetail and save join date
                 messages.success(request, 'Account was created for ' + user)
 
                 return redirect('login')
@@ -68,14 +71,14 @@ def login_page(request):
 
 @login_required(login_url='login')
 def profile(request):
-    current_user = request.user
-    all_details_obj = UserDetails.objects.filter(user=current_user)
-    print(all_details_obj)
-    if len(all_details_obj) <= 0:
-        new_user = UserDetails(user=request.user)
-        new_user.save()
 
-    userdetail = UserDetails.objects.get(user=current_user)
+    # all_details_obj = UserDetail.objects.filter(user=current_user)
+    # print(all_details_obj)
+    # if len(all_details_obj) <= 0:
+    #     new_user = UserDetail(user=request.user)
+    #     new_user.save()
+    current_user = request.user
+    userdetail = UserDetail.objects.get(user=current_user)
     print(userdetail)
     # current_user = (current_user, )
     # print(userdetail.name)
@@ -83,11 +86,11 @@ def profile(request):
     # print(current_user, all_details_obj)
 
     # try:
-    #     new_user = request.user.userdetails
-    # except UserDetails.DoesNotExist:
-    #     new_user = UserDetails(user=request.user)
+    #     new_user = request.user.UserDetail
+    # except UserDetail.DoesNotExist:
+    #     new_user = UserDetail(user=request.user)
     # if current_user not in all_details_obj[0]:
-    #     new_user = UserDetails(user=request.user)
+    #     new_user = UserDetail(user=request.user)
     #     new_user.save()
 
     # print(new_user)
@@ -253,7 +256,7 @@ def postComments(request):
 
 def update_details(request, attr2change):
     user = request.user
-    detail_user = UserDetails.objects.get(user=user)
+    detail_user = UserDetail.objects.get(user=user)
     if request.method == "POST":
         # for password change request
         if attr2change == "changepsw":
@@ -355,7 +358,7 @@ def update_details(request, attr2change):
     #     print("reply")
     #     messages.success(
     #         request, "Your Reply has been posted successfully")
-    # UserDetails.save()
+    # UserDetail.save()
 
 
 # @login_required(login_url='login')

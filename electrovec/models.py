@@ -6,7 +6,7 @@ from decimal import Decimal
 from django.core.validators import MinValueValidator
 
 
-class UserDetails(models.Model):
+class UserDetail(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=True, blank=True)
     phone = models.CharField(max_length=200, null=True, blank=True)
